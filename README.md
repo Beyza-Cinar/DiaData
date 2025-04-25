@@ -90,5 +90,5 @@ polar version 1.27.1
 The code is organized as follows: 
 
 - datasets for T1D : Contains the integrated dataset. If restricted datasets are downloaded, they should be stored in this folder under datasets for T1D/granada/... or datasets for T1D/diatrend/...
-- Data_intergation.py: Contains the functions to read and integrate the single datasets. If necessary, the paths to the datasets should be changed here. 
+- data_intergation.py: Contains the functions to read and integrate the single datasets. If necessary, the paths to the datasets should be changed here. 
 - Data_Exploration.ipynb: Contains example code to read the required funtions. Provides statistical analysis of the dataset.
