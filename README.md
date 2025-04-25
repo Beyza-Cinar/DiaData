@@ -13,6 +13,7 @@ matplotlib version 3.7.2
 
 pandas version 2.0.3
 
+polar version 1.27.1
 
 
 ## Summary of Used Datasets 
@@ -91,17 +92,3 @@ The code is organized as follows:
 - datasets for T1D : Contains the integrated dataset. If restricted datasets are downloaded, they should be stored in this folder under datasets for T1D/granada/... or datasets for T1D/diatrend/...
 - Data_intergation.py: Contains the functions to read and integrate the single datasets. If necessary, the paths to the datasets should be changed here. 
 - Data_Exploration.ipynb: Contains example code to read the required funtions. Provides statistical analysis of the dataset.
-
-
-
-## Loading the Datasets
-
-1. Read the data with the following code: combine_data(mode)
-
-   1. mode parameter can be an integer of 1, 2, or 3
-
-      1: all glucose values to create main database 
-
-      2: glucose values and demographics to create subdatabase I
-
-      3: glucose values and heart-rate to create subdatabase II
