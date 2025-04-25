@@ -1,7 +1,9 @@
 # DiaData: An Integrated Large Dataset for Type 1 Diabetes and Hypoglycemia Research
 
-This resopitory presents DiaData, an integrated dataset containing CGM measuremetns of 15 different datasets collected from patients with type 1 diabetes.The datasets used in this study were obtained from multiple third-party sources. Due to licensing restrictions, we do not redistribute the full integrated dataset. This file contains the desctiotopm of the codes and functions used to retreive data of teh single datasets and also shares a part of the integrated datasets (13 out of 15 datasets) under https://github.com/Beyza-Cinar/DiaData/datasets for T1D/...
+This project presents DiaData, an integrated dataset that combines Continuous Glucose Monitoring (CGM) measurements from 15 different datasets, all collected from patients with Type 1 Diabetes. The datasets used in this study were obtained from a variety of third-party sources. Due to licensing restrictions, we are unable to redistribute the full integrated dataset. However, this repository provides:
 
+- A detailed description of the code and functions used to retrieve and process data from each individual dataset.
+- Access to a partial version of the integrated dataset, containing 13 out of the 15 datasets.. 
 
 ## Requirements
 
