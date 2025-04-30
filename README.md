@@ -44,18 +44,18 @@ numpy version 1.24.3
 
   Steps necessary to access the T1DiabetesGranada dataset ( https://doi.org/10.5281/zenodo.10050944):
 
-  1. Register for a Zenodo account (https://zenodo.org).
-  2. Accept the Data Usage Agreement.
-  3. send a request specifying full name, email, and the justification of the data use.
+  - Register for a Zenodo account (https://zenodo.org).
+  - Accept the Data Usage Agreement.
+  - send a request specifying full name, email, and the justification of the data use.
 
 2. **DiaTrend**: Prioleau T., Bartolome A., Comi R., Stanger C. "DiaTrend: A dataset from advanced diabetes technology to enable development of novel analytic solutions," Scientific Data, 10 (556), 2023. https://doi.org/10.1038/s41597-023-02469-5.
 
   Steps necessary to access the DiaTrend dataset on (https://doi.org/10.7303/syn38187184):
 
-  1. Register for a Synapse account (www.synapse.org).
-  2. Become a Synapse Certified User with a validated user profile.
-  3. Submit an Intended Data Use statement.
-  4. Agree to the Conditions of Use.
+  - Register for a Synapse account (www.synapse.org).
+  - Become a Synapse Certified User with a validated user profile.
+  - Submit an Intended Data Use statement.
+  - Agree to the Conditions of Use.
 
 3. **CITY**: The source of a subset of the data is the Joslin Diabetes Center and/or Jaeb Center for Health Research. (2018). CGM Intervention in Teens and Young Adults with T1D (CITY) (3.0). Retrieved from https://public.jaeb.org/dataset/565. The analyses content and conclusions presented herein are solely the responsibility of the authors and have not been reviewed or approved by the Joslin Diabetes Center and/or Jaeb Center for Health Research.
 
