@@ -15,6 +15,8 @@ pandas version 2.0.3
 
 numpy version 1.24.3
 
+polars version 1.27.1
+
 
 ## Summary of Used Datasets 
 
