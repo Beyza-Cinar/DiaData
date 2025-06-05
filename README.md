@@ -3,7 +3,7 @@
 This project presents DiaData, an integrated dataset that combines Continuous Glucose Monitoring (CGM) measurements from 15 different datasets, all collected from patients with Type 1 Diabetes. The datasets used in this study were obtained from a variety of third-party sources. Due to licensing restrictions, we are unable to redistribute the full integrated dataset. However, this repository provides:
 
 - A detailed description of the code and functions used to retrieve and process data from each individual dataset.
-- Access to a partial version of the integrated dataset, containing 13 out of the 15 datasets. The data can be found in https://www.kaggle.com/datasets/beyzacinar22/diadata.
+- Access to a partial version of the integrated dataset, containing 13 out of the 15 datasets. The data can be found in https://openhsu.ub.hsu-hh.de/handle/10.24405/20048 or https://www.kaggle.com/datasets/beyzacinar22/diadata.
 
 ## Requirements
 
