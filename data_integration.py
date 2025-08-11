@@ -32,6 +32,8 @@ def df_resample(df_org, timestamp, frequency, mode, fillid, value):
         df[timestamp] = df[timestamp].dt.round(frequency)
         # rounding can induce duplicates which need to be removed to enable resampling
         df = df.drop_duplicates(subset=[timestamp])
+        # drops nan entries 
+        df = df.dropna(subset=[timestamp])
         # the timestamps column is set to be the index 
         df = df.set_index(timestamp)
         # based on the index, the dataframe is resampled to the target frequency
@@ -298,23 +300,6 @@ def read_data(read_all = True):
         # resamples to 5 minute intervals to have unifrom sample rate; this is done for each subject seperately
         df_city = df_city.groupby("PtID", group_keys=False).apply(lambda x: df_resample(x, timestamp = "ts", frequency= "5min", mode="glucose", fillid = "PtID", value = "GlucoseCGM"))
 
-        # reads dataframe including sex data
-        df_city_screen = smart_read("datasets for T1D/CITYPublicDataset/Data Tables/DiabScreening.txt")
-        # reduces the columns to only important columns
-        df_city_screen = df_city_screen[["PtID", "Sex"]]
-
-        # reads dataframe including age data
-        df_city_age = smart_read("datasets for T1D/CITYPublicDataset/Data Tables/PtRoster.txt")
-        # reduces the columns to only important columns
-        df_city_age = df_city_age[["PtID", "AgeAsOfEnrollDt"]]
-
-        # merges dataframes of sex and age 
-        df_city_info = pd.merge(df_city_screen, df_city_age, on=["PtID"], how="inner")
-
-        # merges dataframes of demorgaphics and CGM data
-        df_city = pd.merge(df_city, df_city_info, on=["PtID"], how="left")
-        # column names are renamed for semantic equality
-        df_city = df_city.rename(columns={"AgeAtEnrollment" : "Age"})
         # adds the database name to the patient ID to enable reidentification 
         df_city["PtID"] = df_city["PtID"].astype(str) + "_CITY"
         # adds a "Database" column with the name of the Dataset to enable reidentification
@@ -571,24 +556,6 @@ def read_data(read_all = True):
         # resamples to 5 minute intervals to have unifrom sample rate; this is done for each subject seperately
         df_RBG = df_RBG.groupby("PtID", group_keys=False).apply(lambda x: df_resample(x, timestamp = "ts", frequency= "5min", mode="glucose", fillid = "PtID", value = "GlucoseCGM"))
 
-        # reads dataframe with sex data
-        df_RBG_screen = smart_read("datasets for T1D/REPLACEBG/Data Tables/HScreening.txt")
-        # reduces the columns to only important columns
-        df_RBG_screen = df_RBG_screen[["PtID", "Gender"]]
-
-        # reads dataframe with age data
-        df_RBG_age = smart_read("datasets for T1D/REPLACEBG/Data Tables/HPtRoster.txt")
-        # reduces the columns to only important columns
-        df_RBG_age = df_RBG_age[["PtID", "AgeAsOfEnrollDt"]]
-
-        # merges dataframes of sex and age data
-        df_RBG_screen = pd.merge(df_RBG_screen, df_RBG_age, on="PtID", how="inner")
-
-        # merges dataframes of demographics and CGM data 
-        df_RBG = pd.merge(df_RBG, df_RBG_screen, on=["PtID"], how="left")
-
-        # column names are renamed for semantic equality
-        df_RBG_screen = df_RBG_screen.rename(columns={"AgeAsOfEnrollDt" : "Age", "Gender": "Sex"})
         # adds the database name to the patient ID to enable reidentification 
         df_RBG["PtID"] = df_RBG["PtID"].astype(str) + "_RBG"
         # adds a "Database" column with the name of the Dataset to enable reidentification
@@ -621,7 +588,7 @@ def read_data(read_all = True):
         df_SENCE = pd.merge(df_SENCE, df_SENCE_screen, on=["PtID"], how="left")
 
         # column names are renamed for semantic equality
-        df_SENCE = df_SENCE.rename(columns={"Value": "GlucoseCGM", "AgeAsOfEnrollDt" : "Age", "HbA1cTestRes": "Hba1c", "Gender": "Sex"})
+        df_SENCE = df_SENCE.rename(columns={"Value": "GlucoseCGM", "AgeAsOfEnrollDt" : "Age", "Gender": "Sex"})
         # adds the database name to the patient ID to enable reidentification 
         df_SENCE["PtID"] = df_SENCE["PtID"].astype(str) + "_SENCE"
         # adds a "Database" column with the name of the Dataset to enable reidentification
@@ -1080,15 +1047,16 @@ def combine_data(modus, restricted_list, columns_to_check = ["Age", "Sex"]):
         # copies the original database
         df = df.copy()
         # converts each age range into a numeric value
-        df[column] = df[column].apply(to_numeric)
+        df["Age_num"] = df[column].apply(to_numeric)
+        df['Age'] = df['Age'].astype(str)
 
         # creates age groups based on defined bins
         bins = [0, 2,6, 10, 13, 17,25, 35, 55, 100]
         labels = ["0-2", "3-6", "7-10", "11-13", "14-17", "18-25", "26-35", "36-55", "56+"]
         
         # categorizes the ages of the "Age" colum into the defined age groups and assign them to new column "AgeGroup"
-        df["AgeGroup"] = pd.cut(df[column], bins=bins, labels=labels, right=True)
-        
+        df["AgeGroup"] = pd.cut(df["Age_num"], bins=bins, labels=labels, right=True)
+        df = df.drop("Age_num", axis=1)
         # returns the dataframe with the new colum "AgeGroup"
         return df
 
@@ -1135,5 +1103,11 @@ def combine_data(modus, restricted_list, columns_to_check = ["Age", "Sex"]):
     # calls the "concat_rows_on_columns()"" function
     combined_df = concat_rows_on_columns(filtered_dfs, columns=columns_to_keep)
 
+    # Sort the DataFrame by 'PtID' and 'ts'
+    df_sorted = combined_df.sort_values(["PtID", "ts"])
+
+    # Drop duplicates based on 'PtID' and 'ts', keeping the first occurrence
+    df_all = df_sorted.drop_duplicates(subset=["PtID", "ts"], keep="first")
+
     # returns the combined_df
-    return combined_df
+    return df_all
