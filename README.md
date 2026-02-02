@@ -91,6 +91,6 @@ polars version 1.27.1
 
 The code is organized as follows: 
 
-- datasets for T1D.zip: Contains the integrated dataset. If restricted datasets are downloaded, they should be stored in this folder under datasets for T1D/granada or datasets for T1D/DiaTrend. The integrated dataset can be downloaded from https://www.kaggle.com/datasets/beyzacinar22/diadata,
+- datasets for T1D.zip: Contains the integrated dataset. If restricted datasets are downloaded, they should be stored in this folder under datasets for T1D/granada or datasets for T1D/DiaTrend. The integrated dataset can be downloaded from https://openhsu.ub.hsu-hh.de/handle/10.24405/20048 or https://zenodo.org/records/16874129,
 - data_intergation.py: Contains the functions to read and integrate the single datasets. If necessary, the paths to the datasets should be changed here. 
 - Data_Exploration.ipynb: Contains example code to read the required funtions. Provides statistical analysis of the dataset.
