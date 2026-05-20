@@ -5,6 +5,8 @@ This project presents DiaData, an integrated dataset that combines Continuous Gl
 - A detailed description of the code and functions used to retrieve and process data from each individual dataset.
 - Access to a partial version of the integrated dataset, containing 13 out of the 15 datasets. The data can be found in https://doi.org/10.5281/zenodo.16874128.
 
+- The datset is described in https://doi.org/10.1051/bioconf/202519503001. Please use this doi for citing the dataset: 10.1051/bioconf/202519503001.
+
 ## Requirements
 
 python version 3.11.4
